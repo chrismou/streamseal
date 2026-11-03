@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-03
+
 ### Fixed
 
 - `encrypt()` no longer treats a read that returns nothing before end of file as the end of the
@@ -64,5 +66,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Psr7\Psr7StreamSeal` adapter taking PSR-7 `StreamInterface` in and out, backed by `Psr7\Psr7StreamWrapper`
   which exposes any PSR-7 stream as a native resource. `psr/http-message` is suggested, not required.
 
-[Unreleased]: https://github.com/chrismou/streamseal/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/chrismou/streamseal/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/chrismou/streamseal/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/chrismou/streamseal/releases/tag/0.1.0
