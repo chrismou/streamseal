@@ -8,8 +8,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 and decrypts PHP stream resources with libsodium's secretstream (XChaCha20-Poly1305), chunk by
 chunk, so memory stays flat and tampering, truncation and trailing data are detected on decrypt.
 
-The package has no tagged release yet. Until 1.0.0 is tagged, backwards compatibility is not a concern:
-delete old APIs rather than deprecating them.
+0.1.0 is tagged and in use. Until 1.0.0, breaking changes are allowed but must be called out in the
+CHANGELOG; the sealed stream format itself must never change (see invariants below).
 
 ## Commands
 
@@ -70,5 +70,5 @@ changes it needs a versioned header, not a silent change.
   docblocks on every method, array shape PHPDoc for arrays.
 - Pint config: PSR-12, alphabetical imports, global classes imported (`use SodiumException;`), no unused imports.
 - Use a plain hyphen `-` in all text; never Unicode dashes.
-- README.md and CHANGELOG.md (Keep a Changelog, single `[Unreleased]` section) document the public
+- README.md and CHANGELOG.md (Keep a Changelog, `[Unreleased]` section above dated releases) document the public
   API and must be updated alongside API changes.
