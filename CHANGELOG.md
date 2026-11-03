@@ -17,3 +17,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `DecryptionFailedException` for wrong key, tampering, truncation, trailing data and missing header;
   `InvalidKeyException` for keys of the wrong length; `StreamException` for failed reads and short writes.
   All implement `StreamSealExceptionInterface`.
+- `Psr7\Psr7StreamSeal` adapter taking PSR-7 `StreamInterface` in and out, backed by `Psr7\Psr7StreamWrapper`
+  which exposes any PSR-7 stream as a native resource. `psr/http-message` is suggested, not required.

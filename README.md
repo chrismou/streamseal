@@ -2,7 +2,7 @@
 
 Streaming authenticated file encryption for PHP, built on libsodium's secretstream
 (XChaCha20-Poly1305). Encrypts a stream of any size in flat memory. Tampering, truncation,
-appended data and a wrong key are all detected on decrypt. Zero dependencies beyond `ext-sodium`.
+appended data and a wrong key are all detected on decrypt. Zero dependencies beyond `ext-sodium`, with an optional PSR-7 adapter.
 
 ## Requirements
 
@@ -49,6 +49,23 @@ $seal = new StreamSeal(chunkBytes: 1_048_576);
 ```
 
 The chunk size is not stored in the sealed stream, so decrypt with the same size you encrypted with.
+
+### PSR-7
+
+Install `psr/http-message` and use the adapter with any PSR-7 stream implementation. It does not
+need the stream to be resource-backed.
+
+```php
+use Chrismou\StreamSeal\Psr7\Psr7StreamSeal;
+
+$seal = new Psr7StreamSeal();
+
+$seal->encrypt($request->getBody(), $sealedStream, $key);
+$seal->decrypt($sealedStream, $responseBody, $key);
+```
+
+Create the output stream with your PSR-17 factory, for example `$factory->createStream()` or
+`$factory->createStreamFromFile('php://temp', 'w+b')`, then attach it to the response with `withBody()`.
 
 ## Errors
 

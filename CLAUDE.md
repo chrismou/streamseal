@@ -42,6 +42,11 @@ One class, `StreamSeal`, and three exceptions under `Exception/` that all implem
 - `readExactly()` loops on short reads because non-local streams return fewer bytes than asked.
   `write()` throws on a short write rather than dropping bytes.
 - `sealedLength()` / `plaintextLength()` are pure arithmetic over the layout above.
+- `Psr7/Psr7StreamSeal` is a thin adapter: it checks readability/writability, wraps each PSR-7
+  stream as a native resource via `Psr7/Psr7StreamWrapper` (a registered stream wrapper that
+  delegates read/write/eof to the `StreamInterface` held in the stream context) and delegates to
+  `StreamSeal`. There is one encryption implementation; never duplicate it for PSR-7.
+  `psr/http-message` is a dev dependency and a `suggest`, never a `require`.
 
 ### Do-not-change invariants
 
@@ -53,8 +58,10 @@ changes it needs a versioned header, not a silent change.
 ## Tests
 
 - `tests/Unit/StreamSealTest.php` covers round trips, every failure mode, argument validation and
-  stream edge cases. Helpers in `tests/Support`: `Streams` (memory streams), `OneByteReadStreamWrapper`
-  (short reads), `UnwritableStreamWrapper` (failed writes).
+  stream edge cases. `tests/Unit/Psr7/Psr7StreamSealTest.php` covers the adapter. Helpers in
+  `tests/Support`: `Streams` (memory streams), `OneByteReadStreamWrapper` (short reads),
+  `UnwritableStreamWrapper` (failed writes), `InMemoryPsr7Stream` (a string-backed `StreamInterface`
+  with no resource, so the adapter is proven not to rely on `detach()`).
 - PHPStan runs over `tests/` too at level 8, so test code needs full type hints and array shapes.
 
 ## Conventions

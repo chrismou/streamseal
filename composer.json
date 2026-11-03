@@ -13,7 +13,8 @@
         "stream",
         "file",
         "authenticated-encryption",
-        "aead"
+        "aead",
+        "psr-7"
     ],
     "authors": [
         {
@@ -34,7 +35,11 @@
     "require-dev": {
         "laravel/pint": "^1.18",
         "phpstan/phpstan": "^2.0",
-        "phpunit/phpunit": "^11.0"
+        "phpunit/phpunit": "^11.0",
+        "psr/http-message": "^1.1 || ^2.0"
+    },
+    "suggest": {
+        "psr/http-message": "Required for the PSR-7 adapter Chrismou\\StreamSeal\\Psr7\\Psr7StreamSeal"
     },
     "autoload": {
         "psr-4": {
