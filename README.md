@@ -4,6 +4,20 @@ Streaming authenticated file encryption for PHP, built on libsodium's secretstre
 (XChaCha20-Poly1305). Encrypts a stream of any size in flat memory. Tampering, truncation,
 appended data and a wrong key are all detected on decrypt. Zero dependencies beyond `ext-sodium`, with an optional PSR-7 adapter.
 
+## What it's for
+
+Encrypting files at rest without ever holding the whole file in memory. Typical uses:
+
+- Encrypting user uploads before they are written to local disk or S3, and decrypting them straight
+  into the HTTP response on download.
+- Encrypting backups, exports or log archives as they are produced.
+- Any case where you need a file to be unreadable without its key, and want to know on the way
+  back out that it has not been modified, truncated or had data appended.
+
+It is symmetric and per-file: you generate a random key for each file, encrypt the file with it,
+and keep the key somewhere safe (typically encrypted in your database alongside the file record).
+Decryption needs the same key.
+
 ## Requirements
 
 - PHP 8.2+
