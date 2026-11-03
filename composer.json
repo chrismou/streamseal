@@ -1,0 +1,61 @@
+{
+    "name": "chrismou/streamseal",
+    "description": "Streaming authenticated file encryption for PHP on libsodium secretstream (XChaCha20-Poly1305). Encrypts a stream of any size in flat memory; tampering, truncation and appended data are detected on decrypt. Zero dependencies.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "encryption",
+        "sodium",
+        "libsodium",
+        "secretstream",
+        "xchacha20",
+        "poly1305",
+        "stream",
+        "file",
+        "authenticated-encryption",
+        "aead"
+    ],
+    "authors": [
+        {
+            "name": "Chris Chrisostomou",
+            "email": "dev@mou.me",
+            "homepage": "https://mou.me"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/chrismou/streamseal",
+        "issues": "https://github.com/chrismou/streamseal/issues",
+        "docs": "https://github.com/chrismou/streamseal/blob/main/README.md"
+    },
+    "require": {
+        "php": "^8.2",
+        "ext-sodium": "*"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.18",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chrismou\\StreamSeal\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Chrismou\\StreamSeal\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-text",
+        "lint": "pint --test",
+        "lint:fix": "pint",
+        "analyse": "phpstan analyse --memory-limit=1G"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
